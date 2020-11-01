@@ -1,0 +1,46 @@
+<ion-toolbar color="primary">
+  <ion-buttons slot="start">
+    <ion-button (click)="close()">
+      <ion-icon name="close" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="secondary">
+    <ion-button (click)="delete()">
+      <ion-icon name="trash-bin-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>{{ viewTitle }}</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="save()">
+      <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+ 
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">Telefon</ion-label>
+    <ion-input type="text" [(ngModel)]="event.title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Treść SMS</ion-label>
+    <ion-input type="text" [(ngModel)]="event.desc"></ion-input>
+  </ion-item>
+  
+  
+  <ion-item>
+    <ion-label color="primary">Start:</ion-label>
+    <ion-datetime displayFormat="YYYY MMM D HH:mm" monthShortNames="sty, lu, mar, kwie, maj, czer, lip, sie, wrz, paź, lis, gru" minuteValues="0,15,30,45" cancel-text="Wyjdź" done-text="Zapisz"
+        minuteValues="0,15,30,45" [value]="event.startTime.toISOString()" (ionChange)="dateStartChanged($event)"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary">Koniec:</ion-label>
+    <ion-datetime displayFormat="YYYY MMM DD HH:mm" monthShortNames="sty, lu, mar, kwie, maj, czer, lip, sie, wrz, paź, lis, gru" minuteValues="0,15,30,45" cancel-text="Wyjdź" done-text="Zapisz" 
+        minuteValues="0,15,30,45" [value]="event.endTime.toISOString()" (ionChange)="dateEndChanged($event)"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Komentarz</ion-label>
+    <ion-textarea [(ngModel)]="event.note"></ion-textarea>
+  </ion-item>
+</ion-content>

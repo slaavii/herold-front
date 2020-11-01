@@ -24,3 +24,34 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+body { 
+    padding: 20px;
+    padding-top: 80px;
+    background-color: whitesmoke;
+}
+
+.cal-modal {
+    --height: 80%;
+    --border-radius: 10px;
+    padding: 25px;
+}
+
+calendar { 
+    .weekview-allday-table{
+        display: none;
+    }
+    .weekview-normal-event-container{
+        margin-top: 37px;
+    }
+    .dayview-allday-label{
+        display: none;
+    }
+    // .dayview-normal-event-container{
+    //     // margin-top: 0px;
+    //     display: none;
+    // }
+    .dayview-allday-content-wrapper{
+       height: 0px;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from './models/user';
@@ -14,7 +14,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
   title = 'herold';
-  currentUser: User;
 
   constructor(
     private platform: Platform,
@@ -24,7 +23,6 @@ export class AppComponent {
     private authenticationService: AuthenticationService
   ) {
     this.initializeApp();
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   initializeApp() {

@@ -17,6 +17,11 @@
           <div class="login">
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
           </div>
+          <ion-row class="ion-justify-content-center" >
+            <div *ngIf="invalid" class="alert">
+              <h3>Login lub hasło niewłaściwe</h3>
+            </div>
+          </ion-row>
         </ion-col>
       </ion-row>
     </ion-grid>

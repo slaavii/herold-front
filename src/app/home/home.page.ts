@@ -7,6 +7,10 @@ import { AppComponent } from '../app.component';
 import { MessageService } from '../services/message.service';
 import { User } from '../models/user';
 import { CalEditPage } from '../pages/cal-edit/cal-edit.page';
+import { AuthenticationService } from '../services/authentication.service';
+import { UserAuth } from '../models/userAuth';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +18,11 @@ import { CalEditPage } from '../pages/cal-edit/cal-edit.page';
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit {
   eventSource = [];
   viewTitle: string;
   selectedDate: string;
-  currentUser: User;
+  currentUser: UserAuth;
 
   calendar = {
     mode: 'month',
@@ -37,9 +41,10 @@ export class HomePage implements OnInit, OnDestroy {
     @Inject(LOCALE_ID) private locale: string,
     private modalCtrl: ModalController,
     private appComp: AppComponent,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthenticationService
   ) {
-    this.currentUser = this.appComp.currentUser;
+    this.authService.currentUser.pipe(first()).subscribe(user => this.currentUser = user);
     this.messageService.getAllMessages().subscribe(message => {
       this.removeEvents();
       message.forEach(element => {
@@ -51,10 +56,6 @@ export class HomePage implements OnInit, OnDestroy {
       this.myCal.loadEvents();
     });
   }
-  ngOnDestroy(): void {
-    this.removeEvents();
-  }
- 
   ngOnInit() {
     
   }
@@ -148,7 +149,7 @@ export class HomePage implements OnInit, OnDestroy {
     await modal.present();
     modal.onDidDismiss().then((result) => {
       if (result.data && result.data.event && 
-        this.isDateFree(result.data.event.startTime) &&
+        // this.isDateFree(result.data.event.startTime) &&
         this.isStartAndEndOk(result.data.event.startTime, result.data.event.endTime)) {
         this.messageService.updateMessage(result.data.event).subscribe(message => this.readOperation(message));
         this.myCal.loadEvents();

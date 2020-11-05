@@ -12,7 +12,7 @@ export class CalModalPage {
   selectedDate;
   event = {
     title: '',
-    desc: 'Przypomnienie o wizycie',
+    desc: 'Uprzejmie informujemy o zarezerwowanej wizycie',
     note: '',
     startTime: null,
     endTime: null

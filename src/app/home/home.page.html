@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-left" size="small">
-      SMS: {{  currentUser.user  }}
+    <ion-title class="ion-text-left" size="small" *ngIf="user$ | async as user">
+      SMS: {{ user.sentSMS }}
     </ion-title>
     <ion-title class="ion-text-center">
       {{ currentUser.user  }}

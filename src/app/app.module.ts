@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomFormsModule } from 'ngx-custom-validators';
 import { MessageService } from './services/message.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MessageService } from './services/message.service';
     StatusBar,
     SplashScreen,
     AuthenticationService,
+    UserService,
     MessageService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

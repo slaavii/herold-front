@@ -9,8 +9,10 @@ import { User } from '../models/user';
 import { CalEditPage } from '../pages/cal-edit/cal-edit.page';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserAuth } from '../models/userAuth';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
+import { exhaustMap, first, map } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { pid } from 'process';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +26,8 @@ export class HomePage implements OnInit {
   today: string;
   selectedDate: string;
   currentUser: UserAuth;
-
+  user$: Observable<User>;
+  
   calendar = {
     mode: 'month',
     currentDate: new Date(),
@@ -43,9 +46,11 @@ export class HomePage implements OnInit {
     private modalCtrl: ModalController,
     private appComp: AppComponent,
     private messageService: MessageService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {
     this.authService.currentUser.pipe(first()).subscribe(user => this.currentUser = user);
+    this.user$ = this.userService.getUser(this.currentUser.user);
     this.messageService.getAllMessages().subscribe(message => {
       this.removeEvents();
       message.forEach(element => {
@@ -58,7 +63,7 @@ export class HomePage implements OnInit {
     });
   }
   ngOnInit() {
-    
+  
   }
  
   // Change current month/week/day

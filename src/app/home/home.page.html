@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-title class="ion-text-left" size="small">
+      SMS: {{  currentUser.user  }}
+    </ion-title>
     <ion-title class="ion-text-center">
       {{ currentUser.user  }}
     </ion-title>
@@ -29,19 +32,6 @@
     </ion-segment-button>
   </ion-segment>
  
-  <!-- <ion-row>
-    <ion-col size="6">
-      <ion-button (click)="createRandomEvents()" expand="block" fill="outline">
-        Add random events
-      </ion-button>
-    </ion-col>
-    <ion-col size="6">
-      <ion-button (click)="removeEvents()" expand="block" fill="outline">
-        Remove all events
-      </ion-button>
-    </ion-col>
-  </ion-row> -->
- 
   <ion-row>
     <!-- Move back one screen of the slides -->
     <ion-col size="2">
@@ -51,7 +41,7 @@
     </ion-col>
  
     <ion-col size="8" class="ion-text-center">
-      <h2>{{ viewTitle }}</h2>
+      <h2>{{ today }} {{ viewTitle }}</h2>
     </ion-col>
  
     <!-- Move forward one screen of the slides -->

@@ -13,29 +13,29 @@
 </ion-toolbar>
  
 <ion-content>
+ <form [formGroup]="ionicForm">
   <ion-item>
     <ion-label position="stacked">Telefon</ion-label>
-    <ion-input type="text" [(ngModel)]="event.title"></ion-input>
+    <ion-input type="text" formControlName="title"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Treść SMS</ion-label>
-    <ion-input type="text" [(ngModel)]="event.desc"></ion-input>
+    <ion-input type="text" formControlName="desc"></ion-input>
   </ion-item>
-  
   
   <ion-item>
     <ion-label color="primary">Start:</ion-label>
     <ion-datetime displayFormat="HH:mm" monthShortNames="sty, lu, mar, kwie, maj, czer, lip, sie, wrz, paź, lis, gru" minuteValues="0,15,30,45" cancel-text="Wyjdź" done-text="Zapisz"
-        minuteValues="0,15,30,45" [value]="selectedDate" (ionChange)="dateStartChanged($event)"></ion-datetime>
+        minuteValues="0,15,30,45" formControlName="start"></ion-datetime>
   </ion-item>
-
   <ion-item>
     <ion-label color="primary">Koniec:</ion-label>
     <ion-datetime displayFormat="HH:mm" monthShortNames="sty, lu, mar, kwie, maj, czer, lip, sie, wrz, paź, lis, gru" minuteValues="0,15,30,45" cancel-text="Wyjdź" done-text="Zapisz" 
-        minuteValues="0,15,30,45" [value]="selectedDate" (ionChange)="dateEndChanged($event)"></ion-datetime>
+        minuteValues="0,15,30,45" formControlName="end"></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Komentarz</ion-label>
-    <ion-textarea [(ngModel)]="event.note"></ion-textarea>
+    <ion-textarea formControlName="note"></ion-textarea>
   </ion-item>
+ </form>
 </ion-content>

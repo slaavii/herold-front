@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://178.42.177.134:8080'
+  apiUrl: 'https://slaavii.ddns.net:8443'
 };
 
 /*

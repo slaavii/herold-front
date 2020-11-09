@@ -21,6 +21,7 @@ import { first } from 'rxjs/operators';
 export class HomePage implements OnInit {
   eventSource = [];
   viewTitle: string;
+  today: string;
   selectedDate: string;
   currentUser: UserAuth;
 
@@ -29,8 +30,8 @@ export class HomePage implements OnInit {
     currentDate: new Date(),
     allDayLabel: 'A',
     formatHourColumn: 'HH:00',
-    autoSelect: false,
-    formatDayTitle: 'dd MMMM, yyyy'
+    autoSelect: true,
+    formatDayTitle: 'MMMM, yyyy'
   };
  
  
@@ -83,6 +84,7 @@ export class HomePage implements OnInit {
   }
 
   onTimeSelected = (ev: { selectedTime: Date }) => {
+    this.today = ev.selectedTime.getDate().toString();
     let aa = ev.selectedTime.setHours(6);
     this.selectedDate = new Date(aa).toISOString();
   }

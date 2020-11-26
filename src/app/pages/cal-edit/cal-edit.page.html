@@ -9,7 +9,7 @@
       <ion-icon name="trash-bin-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-buttons>
-  <ion-title>{{ viewTitle }}</ion-title>
+  
   <ion-buttons slot="end">
     <ion-button (click)="save()">
       <ion-icon name="checkmark" slot="icon-only"></ion-icon>
@@ -19,13 +19,17 @@
  
 <ion-content>
   <ion-item>
-    <ion-label position="stacked">Telefon</ion-label>
-    <ion-input type="text" [(ngModel)]="event.title"></ion-input>
+    <ion-label position="stacked">Imię i Nazwisko</ion-label>
+    <ion-item-divider>{{ event.clientName }}</ion-item-divider>
   </ion-item>
   <ion-item>
+    <ion-label position="stacked">Telefon</ion-label>
+    <ion-item-divider>{{ event.title }}</ion-item-divider>
+  </ion-item>
+  <!-- <ion-item>
     <ion-label position="stacked">Treść SMS</ion-label>
     <ion-input type="text" [(ngModel)]="event.desc"></ion-input>
-  </ion-item>
+  </ion-item> -->
   
   
   <!-- <ion-item>

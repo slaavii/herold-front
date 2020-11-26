@@ -13,7 +13,7 @@ export class MessageService {
 
 constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
-addMessage(message: Message): Observable<Array<any>> {
+addMessage(message: Message): Observable<Array<Message>> {
   let username: any = this.authService.currentUserValue;
   message.username = username.user;
   return this.http.post<any>(`${environment.apiUrl}/message/add`, message);

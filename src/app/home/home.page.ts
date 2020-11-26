@@ -1,5 +1,5 @@
 import { CalendarComponent } from 'ionic2-calendar';
-import { Component, ViewChild, OnInit, Inject, LOCALE_ID, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, Inject, LOCALE_ID, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { CalModalPage } from '../pages/cal-modal/cal-modal.page';
@@ -12,12 +12,11 @@ import { UserAuth } from '../models/userAuth';
 import { Observable, pipe } from 'rxjs';
 import { exhaustMap, first, map } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
-import { pid } from 'process';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
 
 export class HomePage implements OnInit {
@@ -25,16 +24,17 @@ export class HomePage implements OnInit {
   viewTitle: string;
   today: string;
   selectedDate: string;
-  currentUser: UserAuth;
   user$: Observable<User>;
   
   calendar = {
     mode: 'month',
+    noEventsLabel: 'brak wydarzeń',
     currentDate: new Date(),
     allDayLabel: 'A',
     formatHourColumn: 'HH:00',
     autoSelect: true,
-    formatDayTitle: 'MMMM, yyyy'
+    formatDayTitle: 'MMMM, yyyy',
+    formatWeekTitle: `MMMM yyyy, 'tydzień' w`
   };
  
  
@@ -49,8 +49,7 @@ export class HomePage implements OnInit {
     private authService: AuthenticationService,
     private userService: UserService
   ) {
-    this.authService.currentUser.pipe(first()).subscribe(user => this.currentUser = user);
-    this.user$ = this.userService.getUser(this.currentUser.user);
+    this.user$ = this.userService.getUser(this.authService.currentUserValue.user);
     this.messageService.getAllMessages().subscribe(message => {
       this.removeEvents();
       message.forEach(element => {

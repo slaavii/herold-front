@@ -16,6 +16,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomFormsModule } from 'ngx-custom-validators';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
+import { ClientService } from './services/client.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UserService } from './services/user.service';
     AuthenticationService,
     UserService,
     MessageService,
+    ClientService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import { CalModalPageRoutingModule } from './cal-modal-routing.module';
 import { CalModalPage } from './cal-modal.page';
  
 import { NgCalendarModule  } from 'ionic2-calendar';
+import { IonicSelectableModule } from 'ionic-selectable';
  
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { NgCalendarModule  } from 'ionic2-calendar';
     ReactiveFormsModule,
     IonicModule,
     CalModalPageRoutingModule,
-    NgCalendarModule
+    NgCalendarModule,
+    IonicSelectableModule
   ],
   declarations: [CalModalPage]
 })

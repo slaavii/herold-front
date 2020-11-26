@@ -3,8 +3,8 @@
     <ion-title class="ion-text-left" size="small" *ngIf="user$ | async as user">
       SMS: {{ user.sentSMS }}
     </ion-title>
-    <ion-title class="ion-text-center">
-      {{ currentUser.user  }}
+    <ion-title class="ion-text-center" *ngIf="user$ | async as user">
+      {{ user.username }}
     </ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="logout()">
@@ -55,26 +55,53 @@
   <calendar
     [eventSource]="eventSource"
     [calendarMode]="calendar.mode"
+    
     [allDayLabel]="calendar.allDayLabel"
+    [noEventsLabel]="calendar.noEventsLabel"
     [currentDate]="calendar.currentDate"
     [autoSelect]="calendar.autoSelect"
     [formatDayTitle]="calendar.formatDayTitle"
+    [formatWeekTitle]="calendar.formatWeekTitle"
     [formatHourColumn]="calendar.formatHourColumn"
     (onEventSelected)="onEventSelected($event)"
     (onTimeSelected)="onTimeSelected($event)"
     (onTitleChanged)="onViewTitleChanged($event)"
     step="15"
     startingDayWeek="1"
-    [monthviewDisplayEventTemplate]="template"
+    [monthviewEventDetailTemplate]="detailTemplate"
+    [weekviewNormalEventTemplate]="weekTemplate"
+    [dayviewNormalEventTemplate]="dayTemplate"
   >
   </calendar>
-  <ng-template #template let-view="view" let-row="row" let-col="col">
+  <ng-template #weekTemplate let-displayEvent="displayEvent">
+    <div class="calendar-event-inner">{{displayEvent.event.clientName}}</div>
+  </ng-template>
+  <ng-template #dayTemplate let-displayEvent="displayEvent">
+    <div class="calendar-event-inner">{{displayEvent.event.clientName}}</div>
+  </ng-template>
+  <ng-template #detailTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <ion-list style="cursor: pointer" class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
+      <ion-item *ngFor="let event of selectedDate?.events" (click)="onEventSelected(event)">
+              <span *ngIf="!event.allDay" class="monthview-eventdetail-timecolumn">{{event.startTime|date: 'HH:mm'}}
+                  -
+                  {{event.endTime|date: 'HH:mm'}}
+                  |
+              </span>
+          <span *ngIf="event.allDay" class="monthview-eventdetail-timecolumn">{{allDayLabel}}</span>
+          <span class="event-detail"> | {{ event.clientName }} - {{ event.note }}</span>
+      </ion-item>
+      <ion-item *ngIf="selectedDate?.events.length==0">
+          <div class="no-events-label">{{noEventsLabel}}</div>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  <!-- <ng-template #template let-view="view" let-row="row" let-col="col">
     <div [class.with-event]="view.dates[row*7+col].events.length">
       {{view.dates[row*7+col].label}}
       <div class="indicator-container">
         <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
       </div>
     </div>
-  </ng-template>
+  </ng-template> -->
  
 </ion-content>

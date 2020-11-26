@@ -4,7 +4,7 @@
       <ion-icon name="close" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-buttons>
-  <ion-title>{{ viewTitle }}</ion-title>
+  
   <ion-buttons slot="end">
     <ion-button (click)="save()">
       <ion-icon name="checkmark" slot="icon-only"></ion-icon>
@@ -13,11 +13,66 @@
 </ion-toolbar>
  
 <ion-content>
- <form [formGroup]="ionicForm">
+ <form [formGroup]="ionicForm" novalidate>
   <ion-item>
-    <ion-label position="stacked">Telefon</ion-label>
-    <ion-input type="text" formControlName="title"></ion-input>
+    <ion-label position="stacked">Imię i Nazwisko</ion-label>
+    <ionic-selectable
+    #clientComponent
+    [items]="clients"
+    itemTextField="clientName"
+    formControlName="client"
+    [canDeleteItem]="true"
+    [canSearch]="true"
+    (onSearch)="searchClients($event)"
+    (onSearchFail)="onSearchFail($event)" 
+    (onSearchSuccess)="onSearchSuccess($event)"
+    (onDeleteItem)="onDeleteClient($event)"
+    >
+      <ng-template ionicSelectableCloseButtonTemplate>
+        <ion-icon name="close-circle"></ion-icon>
+      </ng-template>
+      <ng-template ionicSelectableItemTemplate text-center let-client="item">
+        {{ client.clientName }}  (   tel: {{ client.telNumber }}   )
+      </ng-template>
+      <ng-template ionicSelectableAddItemTemplate let-client="item">
+					<ion-list>
+						<ion-item-divider>
+                Dodaj klienta
+						</ion-item-divider>
+						<ion-item>
+							<ion-label position="stacked">Imię i nazwisko</ion-label>
+							<ion-input type="text" formControlName="username">
+							</ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label position="stacked">Telefon</ion-label>
+							<ion-input type="text" formControlName="telNumber">
+							</ion-input>
+						</ion-item>
+					</ion-list>
+				<ion-footer>
+					<ion-toolbar>
+						<ion-row>
+							<ion-col>
+								<ion-button ion-button full no-margin (click)="clientComponent.hideAddItemTemplate()">
+                  Anuluj
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button ion-button full no-margin (click)="addClient()">
+                  Dodaj
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-toolbar>
+        </ion-footer>
+      </ng-template>
+    </ionic-selectable>
   </ion-item>
+  <!-- <ion-item>
+    <ion-label position="stacked">Telefon</ion-label>
+    <ion-input type="text" formControlName="telNumber"></ion-input>
+  </ion-item> -->
   <ion-item>
     <ion-label position="stacked">Treść SMS</ion-label>
     <ion-input type="text" formControlName="desc"></ion-input>

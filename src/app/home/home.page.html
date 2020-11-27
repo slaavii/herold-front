@@ -77,7 +77,7 @@
     <div class="calendar-event-inner">{{displayEvent.event.clientName}}</div>
   </ng-template>
   <ng-template #dayTemplate let-displayEvent="displayEvent">
-    <div class="calendar-event-inner">{{displayEvent.event.clientName}}</div>
+    <div class="calendar-event-inner">{{displayEvent.event.clientName}} - {{displayEvent.event.note}}</div>
   </ng-template>
   <ng-template #detailTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
     <ion-list style="cursor: pointer" class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">

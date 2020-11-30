@@ -6,7 +6,6 @@ import { IonicSelectableComponent } from 'ionic-selectable';
 import { Subscription } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { Client } from 'src/app/models/client';
-import { email } from 'ngx-custom-validators/src/app/email/validator';
  
 @Component({
   selector: 'app-cal-modal',
@@ -96,7 +95,7 @@ export class CalModalPage implements OnInit {
     component: IonicSelectableComponent,
     item: Client
     }) {
-    this.clientService.deleteClient(event.item);
+    this.clientService.deleteClient(event.item.id);
     event.component.deleteItem(event.item);
   }
 

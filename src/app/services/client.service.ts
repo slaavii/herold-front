@@ -13,7 +13,8 @@ export class ClientService {
 
     constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
-    deleteClient(item: Client) {
+    deleteClient(id) {
+        this.http.delete(`${environment.apiUrl}/client/del/` + id).subscribe();
     }
   
     addClientAsync(client: Client): Observable<Client[]> {

@@ -60,7 +60,7 @@
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button ion-button full no-margin (click)="addClient()">
+                <ion-button ion-button full no-margin (click)="addClient()" [disabled]="!(telNumberControl.valid  && usernameControl.valid)">
                   Dodaj
                 </ion-button>
               </ion-col>

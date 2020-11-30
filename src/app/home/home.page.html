@@ -87,7 +87,6 @@
                   {{event.endTime|date: 'HH:mm'}}
                   |
               </span>
-          <span *ngIf="event.allDay" class="monthview-eventdetail-timecolumn">{{allDayLabel}}</span>
           <span class="event-detail"> | {{ event.clientName }} - {{ event.note }}</span>
       </ion-item>
       <ion-item *ngIf="selectedDate?.events.length==0">

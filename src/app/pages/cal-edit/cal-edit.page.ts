@@ -12,6 +12,7 @@ export class CalEditPage implements OnInit {
 
   event = {
     id: '',
+    clientName: '',
     title: '',
     desc: '',
     note: '',

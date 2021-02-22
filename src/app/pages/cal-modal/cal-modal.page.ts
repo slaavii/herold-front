@@ -32,7 +32,7 @@ export class CalModalPage implements OnInit {
   ngOnInit() {
     this.clientControl = this.formBuilder.control('', Validators.required),
     this.usernameControl = this.formBuilder.control('', [Validators.required,
-      Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_śżźćęąółŚŻŹĆĘĄÓŁ ]*$')]);
+      Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_-śżźćęąółŚŻŹĆĘĄÓŁ ]*$')]);
     this.telNumberControl = this.formBuilder.control('', [Validators.required, Validators.pattern('^[0-9]{9}$')]);
     this.ionicForm = this.formBuilder.group({
       client: this.clientControl,

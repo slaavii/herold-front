@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'cal-edit',
     loadChildren: () => import('./pages/cal-edit/cal-edit.module').then( m => m.CalEditPageModule)
+  },
+  {
+    path: 'cal-mass',
+    loadChildren: () => import('./pages/cal-mass/cal-mass.module').then( m => m.CalMassPageModule)
   }
 ];
 

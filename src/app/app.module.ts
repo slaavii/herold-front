@@ -17,6 +17,7 @@ import { CustomFormsModule } from 'ngx-custom-validators';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { ClientService } from './services/client.service';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ClientService } from './services/client.service';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule, 
+    NgxCsvParserModule,
     NoopAnimationsModule
     ],
     

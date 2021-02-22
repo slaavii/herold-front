@@ -12,6 +12,7 @@ import { UserAuth } from '../models/userAuth';
 import { Observable, pipe } from 'rxjs';
 import { exhaustMap, first, map } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
+import { CalMassPage } from '../pages/cal-mass/cal-mass.page';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomePage implements OnInit {
   today: string;
   selectedDate: string;
   user$: Observable<User>;
+  howManySMS: Number;
   
   calendar = {
     mode: 'month',
@@ -113,6 +115,15 @@ export class HomePage implements OnInit {
     alert.present();
   }
 
+  async alarmSent(howMany: Number) {
+    const alert = await this.alertCtrl.create({
+      header: 'Info',
+      message: `Pomyślnie wysłano: ${this.howManySMS} wiadomości SMS`,
+      buttons: ['OK'],
+    });
+    alert.present();
+  }
+
   isStartAndEndOk(start: Date, end: Date) {
     if(end.getTime() < start.getTime()) {
       this.alarmOutput();
@@ -173,7 +184,7 @@ export class HomePage implements OnInit {
       componentProps: {
         selectedDate: this.selectedDate
       },
-      cssClass: 'cal-modal',
+      cssClass: 'cal-modal.page',
       backdropDismiss: false
     });
     await modal.present();
@@ -183,6 +194,28 @@ export class HomePage implements OnInit {
         this.isStartAndEndOk(result.data.event.startTime, result.data.event.endTime)) {
         this.messageService.addMessage(result.data.event).subscribe(message => this.readOperation(message));
         this.myCal.loadEvents();
+      }
+    });
+  }
+
+  async openMass() {
+    const modal = await this.modalCtrl.create({
+      component: CalMassPage,
+      componentProps: {
+        selectedDate: this.selectedDate
+      },
+      cssClass: 'cal-mass.page',
+      backdropDismiss: false
+    });
+    await modal.present();
+    modal.onDidDismiss().then((result) => {
+      if (result.data && result.data.event) {
+        this.messageService.sendMassSMS(result.data.event).subscribe(howMany => {
+          if (howMany != -1) {
+            this.howManySMS = howMany;
+            this.alarmSent(howMany);
+          }
+        });
       }
     });
   }

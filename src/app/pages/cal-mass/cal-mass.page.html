@@ -1,0 +1,46 @@
+<ion-toolbar color="primary">
+  <ion-buttons slot="start">
+    <ion-button (click)="close()">
+      <ion-icon name="close" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title class="ion-text-center">Data wysyłki: {{ selectedDate|date: 'yyyy-MM-dd' }}</ion-title>
+  
+  <ion-buttons slot="end">
+    <ion-button (click)="save()">
+      <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+  <form [formGroup]="myForm" novalidate>
+  <ion-item>
+    <ion-label>Klienci</ion-label>
+    <ionic-selectable
+      item-content
+      itemValueField="id"
+      formControlName="client"
+      itemTextField="clientName"
+      [items]="clients"
+      [canClear]="true"
+      [isMultiple]="true">
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Treść SMS</ion-label>
+    <ion-textarea formControlName="sms"></ion-textarea>
+  </ion-item>
+  <ion-item>
+        <ion-label>Wczytaj z pliku CSV</ion-label>
+        <ion-input 
+            formControlName="file"
+            id="file" 
+            type="file" 
+            (change)="onFileChange($event)">
+        </ion-input>
+        <ion-label *ngIf="error" color="danger">Nieprawidłowy plik</ion-label>
+  </ion-item>  
+  </form>
+  <ion-button (click)="saveClients()" [disabled]="error">Zapisz do bazy</ion-button>
+</ion-content>

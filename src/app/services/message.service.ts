@@ -31,4 +31,17 @@ updateMessage(message) {
 deleteMessage(id) {
   return this.http.delete(`${environment.apiUrl}/message/del/` + id);
   }
+
+sendMassSMS(obj: any) {
+  let tab = new Array();
+  obj.telNumbers.forEach(element => {
+    tab.push(element.telNumber);
+    });
+  return this.http.post<any>(`${environment.apiUrl}/message/sendMass`, {
+    username: this.authService.currentUserValue.user,
+    date: obj.selectedDate,
+    telNumbers: tab,
+    sms: obj.sms
+    });
+  }
 }

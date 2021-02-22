@@ -20,7 +20,18 @@ export class ClientService {
     addClientAsync(client: Client): Observable<Client[]> {
         let username: any = this.authService.currentUserValue;
         client.username = username.user;
-        return this.http.post<any>(`${environment.apiUrl}/client/add`, client);
+        return this.http.post<Client[]>(`${environment.apiUrl}/client/add`, client);
+    }
+
+    addClientMultiAsync(clients: Client[]): Observable<Client[]> {
+        let username: any = this.authService.currentUserValue;
+        clients.forEach(el => {
+            el.username = username.user;
+        })
+        return this.http.post<Client[]>(`${environment.apiUrl}/client/addMulti`, {
+            username: username.user,
+            clients: clients
+        });
     }
 
     filterClients(clients: Client[], text: string): Client[] {

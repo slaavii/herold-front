@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://slaavii.ddns.net:8443'
+  apiUrl: 'https://localhost:8443'
 };
 
 /*
